@@ -1,4 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'dart:math';
+
+enum Gender { MAN, WOMAN }
+
+final _valueList = ['첫 번째', '두 번째', '세 번째'];
 
 void main() {
   runApp(MyApp());
@@ -13,13 +20,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      //home: MyHomePage(title: 'Flutter Demo Home Page'),
+      //home: HeroPage(),
+      //home: AnimatedContainerPage(),
+      //home: SilverPage(),
+      //home: SilverListPage(),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -31,12 +43,16 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   final items = List.generate(100, (i) => i).toList();
+  var isChecked = false;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  Gender _gender = Gender.MAN;
+
+  var _selectedValue = '첫 번째';
+
+  var _isOn = false;
+
+  DateTime _selectedDate;
+  String _selectedTime;
 
   @override
   Widget build(BuildContext context) {
@@ -537,16 +553,512 @@ class _MyHomePageState extends State<MyHomePage> {
     // );
 
     // 4.5.5 CircleAvatar
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('4.5.5 CircleAvatar'),
+    //   ),
+    //   body: Center(
+    //     //child: CircularProgressIndicator(),
+    //     child: CircleAvatar(
+    //       child: Icon(Icons.person),
+    //     ),
+    //   ),
+    // );
+
+    // 5.1.1 TextField
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('5.1.1 TextField'),
+    //   ),
+    // body: Center(
+    //   child: TextField(),
+    // ),
+    // body: Center(
+    //   child: TextField(
+    //     decoration: InputDecoration(
+    //       labelText: '여기에 입력하세요.',
+    //     ),
+    //   ),
+    // ),
+    // body: Center(
+    //   child: TextField(
+    //     decoration: InputDecoration(
+    //       border: OutlineInputBorder(),
+    //       labelText: '여기에 입력하세요.',
+    //     ),
+    //   ),
+    // ),
+    //);
+
+    // 5.1.2 CheckBox와 Switch
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('5.1.2 CheckBox와 Switch'),
+    //   ),
+    //   body: Center(
+    //     child: Column(
+    //       mainAxisSize: MainAxisSize.max,
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: <Widget>[
+    //         Checkbox(
+    //             value: isChecked,
+    //             onChanged: (value) {
+    //               setState(() {
+    //                 isChecked = value; // 수정 environment: sdk: ">=2.7.0 <3.0.0"
+    //               });
+    //             }),
+    //         Switch(
+    //           value: isChecked,
+    //           onChanged: (value) {
+    //             setState(() {
+    //               isChecked = value;
+    //             });
+    //           },
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
+
+    // 5.1.3 Radio와 RadioListTile
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     //title: Text('5.1.3 Radio와 RadioListTile'),
+    //     title: Text('Radio / RadioListTile'),
+    //   ),
+    //   body: Padding(
+    //     padding: const EdgeInsets.all(8.0),
+    //     child: Center(
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         crossAxisAlignment: CrossAxisAlignment.center,
+    //         children: <Widget>[
+    //           ListTile(
+    //             title: Text('남자'),
+    //             leading: Radio(
+    //               value: Gender.MAN,
+    //               groupValue: _gender,
+    //               onChanged: (value) {
+    //                 setState(() {
+    //                   _gender = value;
+    //                 });
+    //               },
+    //             ),
+    //           ),
+    //           ListTile(
+    //             title: Text('여자'),
+    //             leading: Radio(
+    //               value: Gender.WOMAN,
+    //               groupValue: _gender,
+    //               onChanged: (value) {
+    //                 setState(() {
+    //                   _gender = value;
+    //                 });
+    //               },
+    //             ),
+    //           ),
+    //           SizedBox(
+    //             height: 40,
+    //           ),
+    //           RadioListTile(
+    //             title: Text('남자'),
+    //             value: Gender.MAN,
+    //             groupValue: _gender,
+    //             onChanged: (value) {
+    //               setState(() {
+    //                 _gender = value;
+    //               });
+    //             },
+    //           ),
+    //           RadioListTile(
+    //             title: Text('여자'),
+    //             value: Gender.WOMAN,
+    //             groupValue: _gender,
+    //             onChanged: (value) {
+    //               setState(() {
+    //                 _gender = value;
+    //               });
+    //             },
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
+
+    // 5.1.4 DropDownButton
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('5.1.4 DropDownButton'),
+    //   ),
+    //   body: Center(
+    //     child: DropdownButton(
+    //       value: _selectedValue,
+    //       items: _valueList.map(
+    //         (value) {
+    //           return DropdownMenuItem(
+    //             value: value,
+    //             child: Text(value),
+    //           );
+    //         },
+    //       ).toList(),
+    //       onChanged: (value) {
+    //         setState(() {
+    //           _selectedValue = value;
+    //         });
+    //       },
+    //     ),
+    //   ),
+    // );
+
+    // 5.2.1 AlertDialog
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('5.2.1 AlertDialog'),
+    //   ),
+    //   body: ElevatedButton(
+    //     onPressed: () {
+    //       showDialog(
+    //         context: context,
+    //         barrierDismissible: false, // user must tap button!
+    //         builder: (BuildContext context) {
+    //           return AlertDialog(
+    //             title: Text('제목'),
+    //             content: SingleChildScrollView(
+    //               child: ListBody(
+    //                 children: <Widget>[
+    //                   Text('Alert Dialog 입니다'),
+    //                   Text('OK를 눌러 닫습니다'),
+    //                 ],
+    //               ),
+    //             ),
+    //             actions: <Widget>[
+    //               TextButton(
+    //                 child: Text('OK'),
+    //                 onPressed: () {
+    //                   Navigator.of(context).pop();
+    //                 },
+    //               ),
+    //               TextButton(
+    //                 child: Text('Cancel'),
+    //                 onPressed: () {
+    //                   Navigator.of(context).pop();
+    //                 },
+    //               ),
+    //             ],
+    //           );
+    //         },
+    //       );
+    //     },
+    //     child: Text('Alert Dialog'),
+    //   ),
+    // );
+
+    // 5.2.2 DatePicker
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('5.2.2 DatePicker'),
+    //   ),
+    //   body: Column(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     crossAxisAlignment: CrossAxisAlignment.center,
+    //     children: <Widget>[
+    //       ElevatedButton(
+    //         onPressed: () {
+    //           Future<DateTime> selectedDate = showDatePicker(
+    //             context: context,
+    //             initialDate: DateTime.now(),
+    //             firstDate: DateTime(2021),
+    //             lastDate: DateTime(2030),
+    //             builder: (BuildContext context, Widget child) {
+    //               return Theme(
+    //                 data: ThemeData.dark(),
+    //                 child: child,
+    //               );
+    //             },
+    //           );
+    //           // 여기서 사용자가 날짜를 선택할 때까지 코드가 블록됨
+    //
+    //           selectedDate.then((dateTime) {
+    //             setState(() {
+    //               _selectedDate = dateTime;
+    //             });
+    //           });
+    //         },
+    //         child: Text('DatePicker'),
+    //       ),
+    //       Text('$_selectedTime'),
+    //     ],
+    //   ),
+    // );
+
+    // 5.2.3 TimePicker
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('5.2.3 TimePicker'),
+    //   ),
+    //   body: Column(
+    //     children: <Widget>[
+    //       ElevatedButton(
+    //         onPressed: () {
+    //           Future<TimeOfDay> selectedTime = showTimePicker(
+    //             initialTime: TimeOfDay.now(),
+    //             context: context,
+    //           );
+    //
+    //           selectedTime.then((timeOfDay) {
+    //             setState(() {
+    //               _selectedTime = '${timeOfDay.hour}:${timeOfDay.minute}';
+    //             });
+    //           });
+    //         },
+    //         child: Text('Time Picker'),
+    //       ),
+    //       Text('$_selectedTime'),
+    //     ],
+    //   ),
+    // );
+
+    // 5.3.1 GestureDetector와 InkWell
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('5.3.1 GestureDetector와 InkWell'),
+    //   ),
+    //   body: Column(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: <Widget>[
+    //       GestureDetector(
+    //         onTap: (){
+    //           print('GestureDetector 클릭!!');
+    //         },
+    //         child: Text('클릭'),
+    //       )
+    //     ],
+    //   ),
+    // );
+
+    // 5.5.1 쿠퍼티노 기본 UI
     return Scaffold(
-      appBar: AppBar(
-        title: Text('4.5.5 CircleAvatar'),
+      appBar: CupertinoNavigationBar(
+        middle: Text('4.10 쿠퍼티노 디자인'),
       ),
-      body: Center(
-        //child: CircularProgressIndicator(),
-        child: CircleAvatar(
-          child: Icon(Icons.person),
-        ),
+      body: Column(
+        children: <Widget>[
+          CupertinoSwitch(
+            value: _isOn,
+            onChanged: (bool value) {
+              setState(() {
+                _isOn = value;
+              });
+            },
+          ),
+          CupertinoButton(
+            borderRadius: BorderRadius.circular(16.0),
+            color: Colors.orange,
+            child: Text('쿠퍼티노 AlertDialog'),
+            onPressed: () {
+              // 클릭 이벤트
+              _showCupertinoDialog();
+            },
+          ),
+          CupertinoButton(
+            child: Text('쿠퍼티노 Picker'),
+            onPressed: () {
+              // 클릭 이벤트
+              _showCupertinoPicker();
+            },
+          ),
+        ],
       ),
     );
   }
+
+  _showCupertinoDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        title: Text('제목'),
+        content: Text('내용'),
+        actions: <Widget>[
+          CupertinoDialogAction(
+            child: Text('Cancel'),
+          ),
+          CupertinoDialogAction(
+            child: Text('Ok'),
+            onPressed: () {
+              Navigator.of(context).pop(); // 다이얼로그 닫기
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  _showCupertinoPicker() async {
+    // CupertinoPicker
+    // 0부터 9까지의 숫자 리스트 생성
+    final _items = List.generate(10, (i) => i);
+    var result = _items[0]; // 기본값 0
+
+    await showCupertinoModalPopup(
+      context: context,
+      builder: (context) => Container(
+        height: 200.0, // 피커의 높이는 200
+        child: CupertinoPicker(
+          children: _items.map((e) => Text('No. $e')).toList(),
+          // 0부터 9까지의 숫자 표시
+          itemExtent: 50.0,
+          // 항목 1개의 높이는 50
+          onSelectedItemChanged: (int value) {
+            result = _items[value];
+          },
+        ),
+      ),
+    );
+    print(result);
+  }
 }
+
+// 5.4.1 Hero
+// 첫 번째 페이지
+// class HeroPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('5.4.1 Hero'),
+//       ),
+//       body: Center(
+//         child: GestureDetector(
+//           onTap: () {
+//             Navigator.push(
+//               context,
+//               MaterialPageRoute(builder: (context) => HeroDetailPage()),
+//             );
+//           },
+//           child: Hero(
+//             tag: 'images', // 여기서 작성한 태그와 두 번째 페이지의 태그가 동일해야 함
+//             child: Image.asset("images/sample.jpg"),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// // 두 번째 페이지
+// class HeroDetailPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('5.4.1 Hero Detail'),
+//       ),
+//       body: Hero(
+//         tag: 'images', // 여기서 작성한 태그와 첫 번째 페이지의 태그가 동일해야 함
+//         child: new Image.asset('images/sample.jpg'),
+//       ),
+//     );
+//   }
+// }
+
+// 5.4.2 AnimatedContainer
+// class AnimatedContainerPage extends StatefulWidget {
+//   @override
+//   _AnimatedContainerPageState createState() => _AnimatedContainerPageState();
+// }
+//
+// class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
+//   var _size = 100.0;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('5.4.2 AnimatedContainer'),
+//       ),
+//       body: Center(
+//         child: GestureDetector(
+//           onTap: () {
+//             final random = Random();
+//             setState(() {
+//               _size = random.nextInt(200).toDouble() + 100;
+//             });
+//           },
+//           child: AnimatedContainer(
+//             duration: Duration(seconds: 1),
+//             width: _size,
+//             height: _size,
+//             child: Image.asset('images/sample.jpg'),
+//             curve: Curves.fastOutSlowIn,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// 5.4.3 SilverAppBar와 SilverFillRemaining
+// class SilverPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: CustomScrollView(
+//         slivers: <Widget>[
+//           SliverAppBar(
+//             // 헤더 영역
+//             pinned: true, // 축소 시 상단에 AppBar가 고정되는지 설정
+//             expandedHeight: 100.0, // 헤더의 최대 높이
+//             flexibleSpace: FlexibleSpaceBar(
+//               // 늘어나는 영역의 UI 정의
+//               title: Text('Silver'),
+//               background: Image.asset(
+//                 'images/sample.jpg',
+//                 fit: BoxFit.cover,
+//               ),
+//             ),
+//           ),
+//           SliverFillRemaining(
+//             // 내용 영역
+//             child: Center(
+//               child: Text('center'),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// 5.4.4 SilverListPage와 SilverList
+// class SilverListPage extends StatelessWidget {
+//   final _items = List.generate(
+//     50,
+//     (i) => ListTile(
+//       title: Text('No. $i'),
+//     ),
+//   );
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: CustomScrollView(
+//         slivers: <Widget>[
+//           SliverAppBar(
+//             pinned: true,
+//             expandedHeight: 180.0,
+//             flexibleSpace: FlexibleSpaceBar(
+//               title: Text('Sliver'),
+//               background: Image.asset(
+//                 'images/sample.jpg',
+//                 fit: BoxFit.cover,
+//               ),
+//             ),
+//           ),
+//           SliverList(
+//             delegate: SliverChildListDelegate(_items),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
