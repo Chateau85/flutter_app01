@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/Ch.10/TodoListPage.dart';
 import 'package:flutter_app/Ch.8/BmiMain.dart';
 import 'package:flutter_app/Ch.7/Page1.dart';
 import 'package:flutter_app/Ch.7/Page2.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       //title: 'Flutter Demo',
       //title: '폼 검증 데모',
-      title: 'StopWatch',
+      //title: 'StopWatch',
+      title: '할 일 관리',
       theme: ThemeData(
         //primarySwatch: Colors.blue,
         primaryColor: Colors.blue,
@@ -63,7 +65,11 @@ class MyApp extends StatelessWidget {
       // ),
       //home: BmiMain(),
 
-      home: StopWatchPage(),
+      // Ch. 9
+      //home: StopWatchPage(),
+
+      // Ch. 10
+      home: TodoListPage(),
     );
   }
 }
