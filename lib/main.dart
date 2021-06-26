@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/BmiMain.dart';
-import 'package:flutter_app/Page1.dart';
-import 'package:flutter_app/Page2.dart';
-import 'package:flutter_app/Page3.dart';
-import 'package:flutter_app/first_page.dart';
-import 'package:flutter_app/second_page.dart';
+import 'package:flutter_app/Ch.8/BmiMain.dart';
+import 'package:flutter_app/Ch.7/Page1.dart';
+import 'package:flutter_app/Ch.7/Page2.dart';
+import 'package:flutter_app/Ch.9/StopWatchPage.dart';
+import 'package:flutter_app/Ch.7/first_page.dart';
 
 import 'dart:math';
 
@@ -28,12 +27,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      //title: 'Flutter Demo',
       //title: '폼 검증 데모',
+      title: 'StopWatch',
       theme: ThemeData(
         //primarySwatch: Colors.blue,
         primaryColor: Colors.blue,
       ),
+
+      // Ch. 1 ~ 6
       //home: MyHomePage(title: 'Flutter Demo Home Page'),
       //home: HeroPage(),
       //home: AnimatedContainerPage(),
@@ -49,15 +51,19 @@ class MyApp extends StatelessWidget {
       //   '/second': (context) => SecondStatefulPage(),
       // },
 
+      // Ch. 7
       //home: MyHomePage(),
 
+      // Ch. 8
       // home: Scaffold(
       //   appBar: AppBar(
       //     title: Text('폼 검증 데모'),
       //   ),
       //   body: MyCustomForm(),
       // ),
-      home: BmiMain(),
+      //home: BmiMain(),
+
+      home: StopWatchPage(),
     );
   }
 }

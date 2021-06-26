@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/BmiResult.dart';
+import 'package:flutter_app/Ch.8/BmiResult.dart';
 
 // 첫 번째 페이지(StatefulWidget)
 class BmiMain extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Person.dart';
+import 'package:flutter_app/Ch.7/Person.dart';
 
 // 두 번째 페이지
 class SecondStatefulPage extends StatefulWidget {
