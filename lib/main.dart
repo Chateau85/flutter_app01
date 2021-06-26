@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/first_page.dart';
+import 'package:flutter_app/second_page.dart';
 
 import 'dart:math';
 
@@ -25,7 +27,15 @@ class MyApp extends StatelessWidget {
       //home: AnimatedContainerPage(),
       //home: SilverPage(),
       //home: SilverListPage(),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      //home: MyHomePage(title: 'Flutter Demo Home Page'),
+      //home: FirstPage(), // 첫 페이지를 시작 페이지로 지정
+      home: FirstStatefulPage(), // 첫 페이지를 시작 페이지로 지정
+      routes: {
+        // '/first': (context) => FirstPage(),
+        // '/second': (context) => SecondPage(),
+        '/first': (context) => FirstStatefulPage(),
+        '/second': (context) => SecondStatefulPage(),
+      },
     );
   }
 }
@@ -1062,3 +1072,35 @@ class _MyHomePageState extends State<MyHomePage> {
 //       ),
 //     );
 //   }
+
+// // 첫 페이지
+// class FirstPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('First'),
+//       ),
+//       body: RaisedButton(
+//         child: Text('다음 페이지로'),
+//         onPressed: () {},
+//       ),
+//     );
+//   }
+// }
+
+// // 두 번째 페이지
+// class SecondPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Second'),
+//       ),
+//       body: RaisedButton(
+//         child: Text('이전 페이지로'),
+//         onPressed: () {},
+//       ),
+//     );
+//   }
+// }
